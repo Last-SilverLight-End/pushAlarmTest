@@ -57,12 +57,33 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         title: String?,
         message: String?,
     ): Notification {
-        return NotificationCompat.Builder(this, CHANNEL_ID)
+        val notificationBuilder = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_baseline_notifications_24)
             .setContentTitle(title)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build()
+
+        when(Type){
+            NotificationType.NORMAL-> Unit
+            NotificationType.CUSTOM->{
+
+            }
+            NotificationType.EXPANDABLE->{
+                notificationBuilder.setStyle(
+                    NotificationCompat.BigTextStyle()
+                        .bigText(
+                            " 🥳🥳🥳🥳🥳🥳🥳🥳🥳 "+
+                           " 🤪🤪🤪🤪🤪🤪🤪 "
+                        )
+                )
+            }
+            else -> {
+
+            }
+        }
+
+
+        return notificationBuilder.build()
     }
 
     // static 과 비슷하나
